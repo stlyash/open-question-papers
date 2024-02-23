@@ -2,12 +2,11 @@
   display: grid;
   justify-items: center;
   text-align: center;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 table {
-  padding: 1cm;
-  margin: 1cm;
   border-collapse: collapse;
+  margin-top: 1cm;
 }
 table,
 th,
@@ -37,6 +36,6 @@ td {
   display: flex;
   flex-direction: row;
 }
-.search-logo{
+.search-logo {
   cursor: pointer;
 }

@@ -14,7 +14,7 @@ interface Item {
 
 function App() {
   const csvUrl =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQHo3R_blkcXb8Vo40Ml9yZPKbo1S57F2iWD6zkwLUGrAWDEommpE_T5G9QriSu-u3F6ahfCojSovCJ/pub?gid=2017034287&single=true&output=csv";
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQHo3R_blkcXb8Vo40Ml9yZPKbo1S57F2iWD6zkwLUGrAWDEommpE_T5G9QriSu-u3F6ahfCojSovCJ/pub?output=csv";
 
   const [displayData, setDisplayData] = useState<Item[]>([]);
 
@@ -31,7 +31,20 @@ function App() {
 
         // Parse CSV data into JSON
         const jsonData = lines.slice(1).map((line): Item => {
-          const values = line.split(",");
+          var indi = 0;
+          for (let i = 0; i < line.length; i++) {
+            if (line[i] === '"' && indi === 0) indi = 1;
+            else if (line[i] === '"' && indi === 1) indi = 0;
+            if (indi === 0 && line[i] === ",") {
+              let a = line;
+              let a2 = a.split("");
+              a2[i] = "^";
+              let a3 = a2.join("");
+              line = a3;
+            }
+          }
+          console.log(line);
+          const values = line.split("^");
           return {
             College: values[2].trim(),
             ExamMonth: values[6].trim(),
@@ -66,7 +79,10 @@ function App() {
         </label>
       </div>
       <form className="search">
-        <input type="text" placeholder="Search" /> <button type="submit" className="search-logo">&#128269;</button>
+        <input type="text" placeholder="Search" />{" "}
+        <button type="submit" className="search-logo">
+          &#128269;
+        </button>
       </form>
 
       <table>
