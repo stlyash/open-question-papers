@@ -1,0 +1,42 @@
+.App {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+table {
+  padding: 1cm;
+  margin: 1cm;
+  border-collapse: collapse;
+}
+table,
+th,
+td {
+  border: 1px solid black;
+}
+th,
+td {
+  padding: 0.2cm 0.4cm;
+  margin: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    overflow-x: scroll;
+  }
+  .header {
+    font-size: 18px;
+  }
+}
+
+.email-instr {
+  font-size: 0.8rem;
+}
+.search {
+  margin-top: 1cm;
+  display: flex;
+  flex-direction: row;
+}
+.search-logo{
+  cursor: pointer;
+}
