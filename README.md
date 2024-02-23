@@ -1,5 +1,8 @@
-# Getting Started with Create React App
+# Open Question Papers
+This Repository is responsible for deployment of the website hosted at openpapers.netlify.app <br>
+You can find different college question papers.
 
+## Getting started with React
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
