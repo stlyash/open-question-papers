@@ -17,7 +17,16 @@ function App() {
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vQHo3R_blkcXb8Vo40Ml9yZPKbo1S57F2iWD6zkwLUGrAWDEommpE_T5G9QriSu-u3F6ahfCojSovCJ/pub?output=csv";
 
   const [displayData, setDisplayData] = useState<Item[]>([]);
-
+  const RemoveQuotes = (obj:string)=>{
+    if(obj[0]==='"')
+    {
+      let objArr = obj.split('');
+      objArr.pop();
+      objArr.shift();
+      return objArr.join('');
+    }
+    else return obj;
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -64,7 +73,7 @@ function App() {
     };
 
     fetchData();
-  }, [csvUrl]);
+  }, []);
 
   return (
     <div className="App">
@@ -75,14 +84,12 @@ function App() {
         </Link>
         <br />
         <label className="email-instr">
-          (Your email would not be recorded, but you need a gmail account.)
+          (Your email would not be recorded, but you do need a gmail account.)
         </label>
       </div>
       <form className="search">
-        <input type="text" placeholder="Search" />{" "}
-        <button type="submit" className="search-logo">
+        <input type="text" placeholder="Start Typing to Search" />{" "}
           &#128269;
-        </button>
       </form>
 
       <table>
@@ -97,12 +104,12 @@ function App() {
         </tr>
         {displayData.map((item) => (
           <tr className="flex-container" key={item["Timestamp"]}>
-            <td>{item["Timestamp"]}</td>
-            <td>{item["College"]}</td>
-            <td>{item["Subject"]}</td>
-            <td>{item["ExamYear"]}</td>
-            <td>{item["ExamMonth"]}</td>
-            <td>{item["Professor"]}</td>
+            <td>{RemoveQuotes(item["Timestamp"])}</td>
+            <td>{RemoveQuotes(item["College"])}</td>
+            <td>{RemoveQuotes(item["Subject"])}</td>
+            <td>{RemoveQuotes(item["ExamYear"])}</td>
+            <td>{RemoveQuotes(item["ExamMonth"])}</td>
+            <td>{RemoveQuotes(item["Professor"])}</td>
             <td>
               <Link to={item["QuestionPaper"]} target="_blank">
                 Link
