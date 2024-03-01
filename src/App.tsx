@@ -17,16 +17,15 @@ function App() {
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vQHo3R_blkcXb8Vo40Ml9yZPKbo1S57F2iWD6zkwLUGrAWDEommpE_T5G9QriSu-u3F6ahfCojSovCJ/pub?output=csv";
 
   const [displayData, setDisplayData] = useState<Item[]>([]);
-  const RemoveQuotes = (obj:string)=>{
-    if(obj[0]==='"')
-    {
-      let objArr = obj.split('');
+  const [search, setSearch] = useState<string>("");
+  const RemoveQuotes = (obj: string) => {
+    if (obj[0] === '"') {
+      let objArr = obj.split("");
       objArr.pop();
       objArr.shift();
-      return objArr.join('');
-    }
-    else return obj;
-  }
+      return objArr.join("");
+    } else return obj;
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -75,6 +74,12 @@ function App() {
     fetchData();
   }, []);
 
+  const filteredData = displayData.filter((item) =>
+    Object.values(item).some((value) =>
+      value.toLowerCase().includes(search.toLowerCase())
+    )
+  );
+
   return (
     <div className="App">
       <h1>Open Question Papers</h1>
@@ -88,8 +93,13 @@ function App() {
         </label>
       </div>
       <form className="search">
-        <input type="text" placeholder="Start Typing to Search" />{" "}
-          &#128269;
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Start Typing to Search"
+        />
+        &#128269;
       </form>
 
       <table>
@@ -102,7 +112,7 @@ function App() {
           <th>Professor</th>
           <th>Link</th>
         </tr>
-        {displayData.map((item) => (
+        {filteredData.map((item) => (
           <tr className="flex-container" key={item["Timestamp"]}>
             <td>{RemoveQuotes(item["Timestamp"])}</td>
             <td>{RemoveQuotes(item["College"])}</td>
