@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
+import PaperTable from "./AppComponents/PaperTable";
+import PaperCard from "./AppComponents/PaperCard";
 
 interface Item {
   College: string;
@@ -18,14 +20,7 @@ function App() {
 
   const [displayData, setDisplayData] = useState<Item[]>([]);
   const [search, setSearch] = useState<string>("");
-  const RemoveQuotes = (obj: string) => {
-    if (obj[0] === '"') {
-      let objArr = obj.split("");
-      objArr.pop();
-      objArr.shift();
-      return objArr.join("");
-    } else return obj;
-  };
+  const [isTable, setIsTable] = useState<boolean>(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,8 +29,6 @@ function App() {
 
         // Split CSV lines
         const lines = csvData.split("\n");
-
-        // Get headers from the first line
 
         // Parse CSV data into JSON
         const jsonData = lines.slice(1).map((line): Item => {
@@ -101,33 +94,54 @@ function App() {
         />
         &#128269;
       </form>
-
-      <table>
-        <tr>
-          <th>Uploaded</th>
-          <th>College</th>
-          <th>Subject</th>
-          <th>Year</th>
-          <th>Month</th>
-          <th>Professor</th>
-          <th>Link</th>
-        </tr>
-        {filteredData.map((item) => (
-          <tr className="flex-container" key={item["Timestamp"]}>
-            <td>{RemoveQuotes(item["Timestamp"])}</td>
-            <td>{RemoveQuotes(item["College"])}</td>
-            <td>{RemoveQuotes(item["Subject"])}</td>
-            <td>{RemoveQuotes(item["ExamYear"])}</td>
-            <td>{RemoveQuotes(item["ExamMonth"])}</td>
-            <td>{RemoveQuotes(item["Professor"])}</td>
-            <td>
-              <Link to={item["QuestionPaper"]} target="_blank">
-                Link
-              </Link>
-            </td>
-          </tr>
-        ))}
-      </table>
+      <div className="view-selecter">
+        <b style={{ marginRight: "0.2cm" }}>View: </b>
+        {/* Grid */}
+        <span
+          className="view-span"
+          onClick={() => {
+            setIsTable(false);
+          }}
+          style={
+            !isTable
+              ? { border: "solid 1px black" }
+              : { border: "solid 1px white" }
+          }
+        >
+          <svg
+            className="view-svg"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 440 510"
+          >
+            <path d="M128 136c0-22.1-17.9-40-40-40L40 96C17.9 96 0 113.9 0 136l0 48c0 22.1 17.9 40 40 40H88c22.1 0 40-17.9 40-40l0-48zm0 192c0-22.1-17.9-40-40-40H40c-22.1 0-40 17.9-40 40l0 48c0 22.1 17.9 40 40 40H88c22.1 0 40-17.9 40-40V328zm32-192v48c0 22.1 17.9 40 40 40h48c22.1 0 40-17.9 40-40V136c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40zM288 328c0-22.1-17.9-40-40-40H200c-22.1 0-40 17.9-40 40l0 48c0 22.1 17.9 40 40 40h48c22.1 0 40-17.9 40-40V328zm32-192v48c0 22.1 17.9 40 40 40h48c22.1 0 40-17.9 40-40V136c0-22.1-17.9-40-40-40l-48 0c-22.1 0-40 17.9-40 40zM448 328c0-22.1-17.9-40-40-40H360c-22.1 0-40 17.9-40 40v48c0 22.1 17.9 40 40 40h48c22.1 0 40-17.9 40-40V328z" />
+          </svg>
+        </span>
+        {/* Table */}
+        <span
+          className="view-span"
+          onClick={() => {
+            setIsTable(true);
+          }}
+          style={
+            isTable
+              ? { border: "solid 1px black" }
+              : { border: "solid 1px white" }
+          }
+        >
+          <svg
+            className="view-svg"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 510 510"
+          >
+            <path d="M64 256V160H224v96H64zm0 64H224v96H64V320zm224 96V320H448v96H288zM448 256H288V160H448v96zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z" />
+          </svg>
+        </span>
+      </div>
+      {isTable ? (
+        <PaperTable fData={filteredData as Item[]} />
+      ) : (
+        <PaperCard fcData={filteredData as Item[]} />
+      )}
     </div>
   );
 }

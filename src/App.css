@@ -3,6 +3,7 @@
   justify-items: center;
   text-align: center;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  margin-bottom: 2cm;
 }
 table {
   border-collapse: collapse;
@@ -20,6 +21,57 @@ td {
   margin: 0;
 }
 
+.email-instr {
+  font-size: 0.8rem;
+}
+.search {
+  margin-top: 1cm;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1cm;
+  background-color: rgb(235, 235, 235);
+  padding: 0.2cm;
+  border-radius: 0.1cm;
+}
+.search-logo {
+  cursor: pointer;
+}
+
+.paper-card-parent {
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+.paper-card {
+  border: solid 1px black;
+  margin: 0.2cm;
+  padding: 0.1cm;
+  text-align: left;
+}
+.linksvg {
+  width: 0.4cm;
+  margin-left: 0.1cm;
+}
+.cardlink {
+  display: flex;
+  justify-content: flex-end;
+}
+.view-selecter {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 0.5cm;
+}
+.view-span {
+  border-radius: 0.1cm;
+}
+.view-svg {
+  height: 0.5cm;
+  padding: 0.1cm;
+  transform: translateY(0.05cm);
+}
 @media only screen and (max-width: 600px) {
   body {
     overflow-x: scroll;
@@ -28,15 +80,8 @@ td {
     font-size: 18px;
   }
 }
-
-.email-instr {
-  font-size: 0.8rem;
-}
-.search {
-  margin-top: 1cm;
-  display: flex;
-  flex-direction: row;
-}
-.search-logo {
-  cursor: pointer;
+@media (max-width: 767px) {
+  .paper-card-parent {
+    grid-template-columns: 1fr;
+  }
 }
