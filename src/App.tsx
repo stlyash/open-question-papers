@@ -80,10 +80,10 @@ function App() {
         style={{ width: "100%" }}
       >
         <div className="container-fluid">
-          <a className="navbar-brand me-5" href="#">
+          <Link className="navbar-brand me-5" to="">
             📝 <span className="fw-bold">Open Papers: </span>Question Papers for
             All
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
