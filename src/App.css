@@ -42,15 +42,11 @@ td {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
-.card {
-  box-shadow: 0 0px 0px 0px rgb(101, 101, 101);
-  transition: box-shadow 100ms;
-}
-.card:hover {
-  box-shadow: 0 5px 5px 0px rgb(101, 101, 101);
-}
-.nav-text:hover{
-  text-decoration: underline;
+.paper-card {
+  border: solid 1px black;
+  margin: 0.2cm;
+  padding: 0.1cm;
+  text-align: left;
 }
 .linksvg {
   width: 0.4cm;
