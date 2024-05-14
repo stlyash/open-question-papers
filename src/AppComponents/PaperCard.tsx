@@ -41,7 +41,7 @@ const PaperCard: React.FC<PaperCardProps> = ({ fcData }) => {
               🧑‍🏫 {RemoveQuotes(item["Professor"])}
             </h6>
             <p className="card-text text-body-secondary">
-              Uploaded: {RemoveQuotes(item["ExamMonth"])},
+              Exam Held: {RemoveQuotes(item["ExamMonth"])},
               {RemoveQuotes(item["ExamYear"])}
             </p>
             <Link
